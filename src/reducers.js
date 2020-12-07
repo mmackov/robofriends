@@ -1,18 +1,25 @@
 import {
 	CHANGE_SEARCH_FIELD,
+	SWITCH_SOURCE,
+	SOURCE_API,
+	SOURCE_LOCAL,
 	REQUEST_ROBOTS_PENDING,
 	REQUEST_ROBOTS_SUCCESS,
 	REQUEST_ROBOTS_FAILED
 } from './constants.js';
 
 const initialStateSearch = {
-	searchField: ''
+	searchField: '',
+	source: SOURCE_API
 }
 
 export const searchRobots = (state=initialStateSearch, action={}) => {
 	switch(action.type) {
 		case CHANGE_SEARCH_FIELD:
 			return Object.assign({}, state, { searchField: action.payload });
+		case SWITCH_SOURCE:
+			var newSource = state.source === SOURCE_API ? SOURCE_LOCAL : SOURCE_API;
+			return Object.assign({}, state, { source: newSource});
 		default:
 			return state;
 	}
